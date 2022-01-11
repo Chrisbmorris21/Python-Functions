@@ -1,35 +1,29 @@
 from datetime import date
 
-types_list = [str, int, date]
 example_data_set = ['Data Value', ['Data Value', (1, 2, 3,), ['a', 'b']]]
 refined_data_set = []
+types_list = [str, int, date]
 
 
-def flatten_data_to_array(value):
-    # Receives raw data type and condenses all values into a single 2d array with key:value pairs
+def break_down_list(value):
 
-    def break_down_list(value_a):
-        # Receives raw data
-        for semi_refined_data in value_a:
-            flatten_data_to_array(semi_refined_data)
-        return value_a
+    def break_down_list_more(semi_refined_data):
+        for record in semi_refined_data:
+            break_down_list(record)
+        return value
 
-    def append_list(value_b):
-
-        if value_b is not None:
-            refined_data = (len(refined_data_set), value_b)
-            refined_data_set.append(refined_data)
-        return value_b
+    def append_list(refined_data):
+        if refined_data is not None:
+            record_entry = (len(refined_data_set), refined_data)
+        refined_data_set.append(record_entry)
+        return value
 
     if type(value) in types_list:
         append_list(value)
     else:
-        break_down_list(value)
-
-    for record in refined_data_set:
-        print(record[1])
+        break_down_list_more(value)
 
 
-flatten_data_to_array(example_data_set)
-
-
+break_down_list(example_data_set)
+for item in refined_data_set:
+    print(item[1])
