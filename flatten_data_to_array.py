@@ -17,8 +17,8 @@ def flatten_data_to_array(value):
     def append_list(value_b):
 
         if value_b is not None:
-            record_entry = (len(refined_data_set), value_b)
-            refined_data_set.append(record_entry)
+            refined_data = (len(refined_data_set), value_b)
+            refined_data_set.append(refined_data)
         return value_b
 
     if type(value) in types_list:
@@ -31,3 +31,5 @@ def flatten_data_to_array(value):
 
 
 flatten_data_to_array(example_data_set)
+
+
